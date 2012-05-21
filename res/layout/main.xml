@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/FrameLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <acorn.software.acuadros.graphics.Grid2DView
+            android:id="@+id/gridDView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/RalativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/tvPlayer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="P1: 1s" style="@style/PlayerFont" android:textColor="#3333D4"/>
+
+            <TextView
+                android:id="@+id/tvPlayer2"
+                style="@style/PlayerFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="0dp"
+                android:text="P2: 2s" android:textColor="#D4D433"/>
+
+            <TextView
+                android:id="@+id/tvPlayer3"
+                style="@style/PlayerFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:text="P3: 5s"
+                android:textColor="#33D433" />
+
+            <TextView
+                android:id="@+id/tvGameMsg"
+                style="@style/GameMsgFont"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Time to play" 
+                android:textColor="#444444" />
+
+            <TextView
+                android:id="@+id/tvPlayer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tvPlayer3"
+                android:layout_alignBottom="@+id/tvPlayer3"
+                android:layout_alignParentRight="true"
+                android:text="P4: 3s" style="@style/PlayerFont" android:textColor="#D43333"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>

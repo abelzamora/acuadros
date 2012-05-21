@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, AcuadrosActivity!</string>
+    <string name="app_name">Acuadros</string>
+    <string name="menu_start">Start Game</string>
+    <string name="menu_exit">Exit</string>
+    <string name="menu_settings">Settings</string>
+
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="MenuFont">
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">#3333D4</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:clickable">true</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:gravity">center</item>
+		<item name="android:layout_width">fill_parent</item> 
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:paddingBottom">35dip</item>
+    </style>
+    <style name="PlayerFont">
+        <item name="android:textSize">20sp</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:clickable">true</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:gravity">center</item>
+		<item name="android:layout_width">fill_parent</item> 
+		<item name="android:layout_height">wrap_content</item>
+    </style>
+        <style name="GameMsgFont">
+        <item name="android:textSize">28sp</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:clickable">true</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:gravity">center</item>
+		<item name="android:layout_width">fill_parent</item> 
+		<item name="android:layout_height">wrap_content</item>
+    </style>
+</resources>
