@@ -32,7 +32,7 @@ public class Square2DDrawable extends Drawable {
 
 	// Initialize color
 	private int color = Color.GRAY;
-	private int colorChecked = Color.BLUE;
+	private int colorChecked = Color.RED;
 
 	// Initialize canvas
 	private Canvas canvas;
