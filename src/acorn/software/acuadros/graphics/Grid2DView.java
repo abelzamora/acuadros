@@ -198,7 +198,7 @@ public class Grid2DView extends View implements OnGestureListener,
 		canvas.scale(mScaleFactor, mScaleFactor);
 		this.drawSquares(canvas);
 		canvas.restore();
-		drawMessage(canvas, textMsg, Color.RED, 18);
+		//drawMessage(canvas, textMsg, Color.RED, 18);
 	}
 
 	@Override
@@ -214,19 +214,7 @@ public class Grid2DView extends View implements OnGestureListener,
 
 	@Override
 	public boolean onDown(MotionEvent event) {
-		float xx = event.getX();
-		float yy = event.getY();
 
-		int column = getColumn(xx);
-		int row = getRow(yy);
-
-		Square2DDrawable square = this.squares.get(column).get(row);
-		if(square.insideX(column, row, xx, yy, this.scaleX, this.scaleY))
-			checkContigousBorderRow(column, row);
-		if(square.insideY(column, row, xx, yy, this.scaleX, this.scaleY))
-			checkContigousBorderColumn(column, row);
-		
-		checkBorderSquare(square);
 		return true;
 	}
 	
@@ -284,8 +272,20 @@ public class Grid2DView extends View implements OnGestureListener,
 	}
 
 	@Override
-	public boolean onSingleTapUp(MotionEvent e) {
+	public boolean onSingleTapUp(MotionEvent event) {
+		float xx = event.getX();
+		float yy = event.getY();
 
+		int column = getColumn(xx);
+		int row = getRow(yy);
+
+		Square2DDrawable square = this.squares.get(column).get(row);
+		if(square.insideX(column, row, xx, yy, this.scaleX, this.scaleY))
+			checkContigousBorderRow(column, row);
+		if(square.insideY(column, row, xx, yy, this.scaleX, this.scaleY))
+			checkContigousBorderColumn(column, row);
+		
+		checkBorderSquare(square);
 		return true;
 	}
 

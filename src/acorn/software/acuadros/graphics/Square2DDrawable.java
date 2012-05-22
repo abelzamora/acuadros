@@ -31,7 +31,7 @@ public class Square2DDrawable extends Drawable {
 	private boolean borderRight = false;
 
 	// Initialize color
-	private int color = Color.LTGRAY;
+	private int color = Color.GRAY;
 	private int colorChecked = Color.BLUE;
 
 	// Initialize canvas
@@ -64,7 +64,7 @@ public class Square2DDrawable extends Drawable {
 	@Override
 	public void draw(Canvas canvas) {
 		// Draw box
-		paint.setARGB(alpha, 235, 235, 235);
+		paint.setARGB(alpha, 243,243,246);
 		paint.setStyle(Paint.Style.FILL);
 		canvas.drawRect(x, y, x + getWidth(), y + getWidth(), paint);
 		
@@ -81,7 +81,7 @@ public class Square2DDrawable extends Drawable {
 		// down border
 		drawLineDown();
 
-		canvas.drawCircle(x, y, MARGIN_ERROR, circulo);
+		//canvas.drawCircle(x, y, MARGIN_ERROR, circulo);
 	}
 
 	private void drawLineRight() {
