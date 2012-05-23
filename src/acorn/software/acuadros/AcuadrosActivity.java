@@ -6,15 +6,14 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.GestureDetector;
+import android.view.GestureDetector.OnDoubleTapListener;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
-import android.view.GestureDetector.OnDoubleTapListener;
-import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Acuadros activity class
@@ -22,8 +21,7 @@ import android.widget.Toast;
  * @author joss
  * 
  */
-public class AcuadrosActivity extends Activity implements OnTouchListener,
-		OnGestureListener, OnDoubleTapListener {
+public class AcuadrosActivity extends Activity implements OnTouchListener, OnGestureListener, OnDoubleTapListener {
 	/* Grid 2D */
 	private Grid2DView grid;
 
@@ -44,8 +42,7 @@ public class AcuadrosActivity extends Activity implements OnTouchListener,
 		frLayout.setBackgroundColor(Color.argb(255, 233, 233, 236));
 
 		// Load font type
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"data/fonts/cookies.ttf");
+		Typeface tf = Typeface.createFromAsset(getAssets(), "data/fonts/cookies.ttf");
 
 		// Get text views
 		TextView tvPlayer1 = (TextView) findViewById(R.id.tvPlayer1);
@@ -64,11 +61,10 @@ public class AcuadrosActivity extends Activity implements OnTouchListener,
 
 		grid = (Grid2DView) findViewById(R.id.gridDView1);
 		grid.setOnTouchListener(this);
-		
+
 		// Gesture listeners
 		this.gestureScanner = new GestureDetector(this);
-		this.mScaleDetector = new ScaleGestureDetector(grid.getContext(),
-				new ScaleListener());
+		this.mScaleDetector = new ScaleGestureDetector(grid.getContext(), new ScaleListener());
 	}
 
 	@Override
@@ -106,8 +102,7 @@ public class AcuadrosActivity extends Activity implements OnTouchListener,
 	}
 
 	@Override
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-			float velocityY) {
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 		grid.fling(e1, e2, velocityX, velocityY);
 		return false;
 	}
@@ -118,8 +113,7 @@ public class AcuadrosActivity extends Activity implements OnTouchListener,
 	}
 
 	@Override
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-			float distanceY) {
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 		grid.scroll(distanceX, distanceY);
 		return false;
 	}
@@ -135,8 +129,7 @@ public class AcuadrosActivity extends Activity implements OnTouchListener,
 		return false;
 	}
 
-	private class ScaleListener extends
-			ScaleGestureDetector.SimpleOnScaleGestureListener {
+	private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
 		@Override
 		public boolean onScale(ScaleGestureDetector detector) {
 			blockGesture = true;

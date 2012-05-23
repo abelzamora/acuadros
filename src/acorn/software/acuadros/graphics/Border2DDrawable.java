@@ -9,6 +9,7 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 
 public class Border2DDrawable extends Drawable {
+	private static final int STROKE_LINE = 4;
 	/* Border position */
 	private PointF p1;
 	private PointF p2;
@@ -41,12 +42,14 @@ public class Border2DDrawable extends Drawable {
 		// Init paint
 		this.paint = new Paint();
 		this.paint.setARGB(this.alpha, 100, 100, 100);
-		this.paint.setStyle(Paint.Style.FILL);
+		this.paint.setStyle(Paint.Style.STROKE);
+		
 	}
 
 	@Override
 	public void draw(Canvas canvas) {
 		canvas.drawLine(this.p1.x, this.p1.y, this.p2.x, this.p2.y, this.paint);
+		invalidateSelf();
 
 	}
 
@@ -76,6 +79,7 @@ public class Border2DDrawable extends Drawable {
 			// Activate border
 			active = true;
 			this.paint.setColor(Color.BLUE);
+			this.paint.setStrokeWidth(STROKE_LINE);
 			return active;
 		}
 	}
