@@ -40,6 +40,7 @@ public class Grid2DView extends View {
 	/* Grid array */
 	private Vector<Vector<Square2DDrawable>> squares;
 
+
 	/**
 	 * Grid2DView constructor
 	 * 
@@ -87,14 +88,13 @@ public class Grid2DView extends View {
 		// Initialize variables
 		float currentX;
 		float currentY;
-		for (int i = 0; i <= this.nColumms; i++) {
+		for (int i = 0; i < this.nColumms; i++) {
 			currentX = i * Square2DDrawable.WIDTH;
 			this.squares.add(new Vector<Square2DDrawable>());
 
-			for (int j = 0; j <= this.nRows; j++) {
+			for (int j = 0; j < this.nRows; j++) {
 				currentY = j * Square2DDrawable.WIDTH;
-				this.squares.get(i).add(
-						new Square2DDrawable(new PointF(currentX, currentY)));
+				this.squares.get(i).add(new Square2DDrawable(new PointF(currentX, currentY)));
 
 			}
 
@@ -125,6 +125,7 @@ public class Grid2DView extends View {
 		this.drawSquares(canvas);
 		canvas.restore();
 		drawMessage(canvas, textMsg, Color.RED, 18);
+
 	}
 
 	/**
@@ -152,8 +153,7 @@ public class Grid2DView extends View {
 		paint.setColor(color);
 		paint.setTextSize(size);
 		paint.setTypeface(Typeface.MONOSPACE);
-		float textX = ((float) canvas.getWidth() / 2)
-				- (paint.measureText(text) / 2);
+		float textX = ((float) canvas.getWidth() / 2) - (paint.measureText(text) / 2);
 		float textY = (canvas.getHeight() / 2) - size;
 		canvas.drawText(textMsg, textX, textY, paint);
 	}
@@ -174,10 +174,8 @@ public class Grid2DView extends View {
 	 * @param row
 	 */
 	private void centerGrid(int column, int row) {
-		this.x = -(int) (((Square2DDrawable.WIDTH * scaleFactor * (column) * 2) - this.dWidth) / 2 + (Square2DDrawable.WIDTH
-				* scaleFactor / 2));
-		this.y = -(int) (((Square2DDrawable.WIDTH * scaleFactor * (row) * 2) - this.dHeigth) / 2 + (Square2DDrawable.WIDTH
-				* scaleFactor / 2));
+		this.x = -(int) (((Square2DDrawable.WIDTH * scaleFactor * (column) * 2) - this.dWidth) / 2 + (Square2DDrawable.WIDTH * scaleFactor / 2));
+		this.y = -(int) (((Square2DDrawable.WIDTH * scaleFactor * (row) * 2) - this.dHeigth) / 2 + (Square2DDrawable.WIDTH * scaleFactor / 2));
 	}
 
 	/**
@@ -204,8 +202,7 @@ public class Grid2DView extends View {
 		return row;
 	}
 
-	public boolean fling(MotionEvent e1, MotionEvent e2, float velocityX,
-			float velocityY) {
+	public boolean fling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 		Scroller scroller = new Scroller(this.getContext());
 		scroller.extendDuration(20);
 		// scroller.fling(x, y, (int) velocityX, (int) velocityY, (int) -limitX,
@@ -214,10 +211,28 @@ public class Grid2DView extends View {
 	}
 
 	public boolean scroll(float distanceX, float distanceY) {
-		x -= distanceX;
-		y -= distanceY;
-		invalidate();
+		if (!lockScroll(distanceX, distanceY)) {
+			x -= distanceX;
+			y -= distanceY;
+			invalidate();
+		}
 		return true;
+	}
+
+	public boolean lockScroll(float x, float y) {
+		float fColumn = this.getColumn(x);
+		float fRow = this.getRow(y);
+
+		int iColumn = (int) fColumn;
+		int iRow = (int) fRow;
+		float factorV = fColumn - iColumn;
+		float factorH = fRow - iRow;
+
+		if ((factorV < 0.1f) || (factorV > 0.9f) || (factorH < 0.1f) || (factorH > 0.9f)) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public boolean singleTapUp(float x, float y) {
@@ -232,11 +247,11 @@ public class Grid2DView extends View {
 		if (factorV < 0.1f) {
 			// Left square border
 			try {
-				if(this.squares.get(iColumn).get(iRow).activateBorderLeft()) {
+				if (this.squares.get(iColumn).get(iRow).activateBorderLeft()) {
 					this.squares.get(iColumn).get(iRow).checkScore();
 				}
-				
-				if(this.squares.get(iColumn - 1).get(iRow).activateBorderRight()) {
+
+				if (this.squares.get(iColumn - 1).get(iRow).activateBorderRight()) {
 					this.squares.get(iColumn - 1).get(iRow).checkScore();
 				}
 			} catch (Exception e) {
@@ -245,11 +260,11 @@ public class Grid2DView extends View {
 		} else if (factorV > 0.9f) {
 			// Right square border
 			try {
-				if(this.squares.get(iColumn).get(iRow).activateBorderRight()) {
+				if (this.squares.get(iColumn).get(iRow).activateBorderRight()) {
 					this.squares.get(iColumn).get(iRow).checkScore();
 				}
-				
-				if(this.squares.get(iColumn + 1).get(iRow).activateBorderLeft()) {
+
+				if (this.squares.get(iColumn + 1).get(iRow).activateBorderLeft()) {
 					this.squares.get(iColumn + 1).get(iRow).checkScore();
 				}
 			} catch (Exception e) {
@@ -258,11 +273,11 @@ public class Grid2DView extends View {
 		} else if (factorH < 0.1f) {
 			// Up square border
 			try {
-				if(this.squares.get(iColumn).get(iRow).activateBorderUp()) {
+				if (this.squares.get(iColumn).get(iRow).activateBorderUp()) {
 					this.squares.get(iColumn).get(iRow).checkScore();
 				}
-				
-				if(this.squares.get(iColumn).get(iRow - 1).activateBorderDown()) {
+
+				if (this.squares.get(iColumn).get(iRow - 1).activateBorderDown()) {
 					this.squares.get(iColumn).get(iRow - 1).checkScore();
 				}
 			} catch (Exception e) {
@@ -271,10 +286,10 @@ public class Grid2DView extends View {
 		} else if (factorH > 0.9f) {
 			// Down square border
 			try {
-				if(this.squares.get(iColumn).get(iRow).activateBorderDown()) {
+				if (this.squares.get(iColumn).get(iRow).activateBorderDown()) {
 					this.squares.get(iColumn).get(iRow).checkScore();
 				}
-				if(this.squares.get(iColumn).get(iRow + 1).activateBorderUp() ) {
+				if (this.squares.get(iColumn).get(iRow + 1).activateBorderUp()) {
 					this.squares.get(iColumn).get(iRow + 1).checkScore();
 				}
 			} catch (Exception e) {
@@ -321,4 +336,25 @@ public class Grid2DView extends View {
 		invalidate();
 		return true;
 	}
+
+	/*
+	 * public boolean onTouchEvent(MotionEvent event) { float x = event.getX();
+	 * float y = event.getY();
+	 * 
+	 * switch (event.getAction()) { case MotionEvent.ACTION_DOWN: touch_start(x,
+	 * y); invalidate(); break; case MotionEvent.ACTION_MOVE: touch_move(x, y);
+	 * invalidate(); break; case MotionEvent.ACTION_UP: touch_up();
+	 * invalidate(); break; } return true; }
+	 * 
+	 * private void touch_start(float x, float y) {
+	 * 
+	 * System.out.println("touch start -- X: "+x + " Y: "+y); }
+	 * 
+	 * private void touch_move(float x, float y) {
+	 * System.out.println("touch move -- X: "+x + " Y: "+y); } private void
+	 * touch_up() { System.out.println("touch up -- X: "+x + " Y: "+y); }
+	 */
+
+	
+	
 }
