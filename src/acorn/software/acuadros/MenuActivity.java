@@ -52,7 +52,7 @@ public class MenuActivity extends Activity implements OnTouchListener {
 	}
 
 	/**
-	 * Dialogo
+	 * Dialogos
 	 */
 	private void makeDialog() {
 
